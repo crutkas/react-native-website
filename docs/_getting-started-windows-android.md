@@ -4,6 +4,20 @@ You will need Node, the React Native command line interface, a JDK, and Android 
 
 While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
 
+:::note Optional prerequisite automation (personal-fork preview)
+This [source preview](https://github.com/crutkas/WindowsDeveloperConfig-oem/pull/2) is an experiment in a personal fork, not a React Native endorsement. It targets x64 Windows hosts building Android apps, not React Native for Windows desktop apps or iOS.
+
+Review the [preview guide, source, and package terms](https://github.com/crutkas/WindowsDeveloperConfig-oem/blob/crutkas-devconfig-fork-only-workloads/src/docs/windows-onboarding-preview.md) before running it. It requires Git, PowerShell, and WinGet; installers can request administrator approval. From a reviewed checkout of that fork's `crutkas-devconfig-fork-only-workloads` branch, run:
+
+```powershell
+.\src\Workloads\install-source.ps1 -Workload react-native
+```
+
+The workload installs Node LTS (22.11.0 or newer), Microsoft JDK17, and Android Studio using WinGet instead of Chocolatey. The first run intentionally stops until you complete Android Studio setup and use [SDK Manager](#android-sdk) to install Platform-Tools, Android SDK Platform 35, Build-Tools 36.0.0, and Command-line Tools (latest). Separately review Google's SDK licenses with `sdkmanager.bat --licenses`, then rerun the workload as described in the preview guide. Only after these checks pass does it set user `ANDROID_HOME` and add platform-tools to user `Path`; its JDK17 selection applies only to the current session.
+
+This is not a complete build environment: device or AVD setup remains manual, as described below. The workload does not configure hypervisors or WSL. You can instead follow the manual instructions below.
+:::
+
 <h3 id="jdk">Node, JDK</h3>
 
 We recommend installing Node via [Chocolatey](https://chocolatey.org/install), a popular package manager for Windows.
